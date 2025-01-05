@@ -9,13 +9,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .body1 {
-            background: url('include/index.gif') no-repeat center center fixed;
+            background: url('include/raz.gif') no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
             margin: 0;
         }
         .body2 {
-            background: url('include/raz.gif') no-repeat center center fixed;
+            background: url('include/raz2.gif') no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
             margin: 0;
@@ -458,6 +458,19 @@
             ) {
                 e.preventDefault();
             }
+        });
+    </script>
+    <script>
+        // 頁面載完後執行
+        document.addEventListener('DOMContentLoaded', function () {
+            // 創建一個隱藏用的 Image 對象
+            const preloadImg = new Image();
+            // 指定路徑
+            preloadImg.src = 'include/raz2.gif';
+            
+            // 或者監聽 onload，看是否載入完成
+            preloadImg.onload = function() {
+            };
         });
     </script>
 </body>
