@@ -6,6 +6,7 @@
     <title>Dropdown Menu with Links</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .body1 {
@@ -64,6 +65,12 @@
             }
         }
 
+        /* 警告訊息閃爍 */
+        .blinking-warning {
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
         #dataOutput {
             width: 100%;
             height: 450px;
@@ -97,6 +104,9 @@
         }
     </style>
 </head>
+<script type="text/javascript">
+    var encoded = "62f7b59e8a46ab28f98d213d442352e7";
+</script>
 <body class="body1">
     <div class="container mt-1">
         <div id="page1">
@@ -137,7 +147,7 @@
                 <div class="row mt-1 text-center">
                     <div class="col-12">
                         <label>使用裝置</label>
-                        <select class="form-control">
+                        <select id="device" class="form-control">
                             <option value="0">請選擇</option>
                             <option value="PC">PC</option>
                             <option value="平板">平板</option>
@@ -170,10 +180,11 @@
                         </select>
                     </div>
                 </div>
-                <div class="row mt-2" id="fu_game_block" style="display: none">
+                <div class="row mt-1 text-center" id="fu_game_block" style="display: none">
                     <div class="col-12">
                         <label>富遊電子</label>
                         <select id="fu_game" class="form-control">
+                            <option value="0">請選擇</option>
                             <option value="富遊電子-戰神賽特">富遊電子-戰神賽特</option>
                             <option value="富遊電子-搖滾派對">富遊電子-搖滾派對</option>
                             <option value="富遊電子-忍 Kunoichi">富遊電子-忍 Kunoichi</option>
@@ -187,10 +198,11 @@
                     </div>
                 </div>
 
-                <div class="row mt-2" id="rsg_game_block" style="display: none">
+                <div class="row mt-1 text-center" id="rsg_game_block" style="display: none">
                     <div class="col-12">
                         <label>RSG</label>
                         <select id="rsg_game" class="form-control">
+                            <option value="0">請選擇</option>
                             <option value="RSG-雷神之錘">RSG-雷神之錘</option>
                             <option value="RSG-戰神呂布">RSG-戰神呂布</option>
                             <option value="RSG-侏羅紀寶藏">RSG-侏羅紀寶藏</option>
@@ -199,12 +211,13 @@
                     </div>
                 </div>
 
-                <div class="row mt-2" id="bng_game_block" style="display: none">
+                <div class="row mt-1 text-center" id="bng_game_block" style="display: none">
                     <div class="col-12">
                         <label>BNG</label>
                         <select id="bng_game" class="form-control">
-                            <option>BNG-天宮聖女</option>
-                            <option>BNG-超級豬寶大盜</option>
+                            <option value="0">請選擇</option>
+                            <option value="BNG-天宮聖女">BNG-天宮聖女</option>
+                            <option value="BNG-超級豬寶大盜">BNG-超級豬寶大盜</option>
                         </select>
                     </div>
                 </div>
@@ -255,17 +268,220 @@
                     <textarea id="dataOutput" class="form-control mt-3" rows="20" readonly style="text-align: center;"></textarea>
                 </div>
             </div>
+            <div class="row mt-1 text-center" id="gopage3_block" style="display: none;">
+                <div class="col-12">
+                    <div class="text-center">
+                        <button class="btn btn-primary w-50" type="button" onclick="gopage3()">下一步</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="page3" style="display: none;">
+            <h2 class="text-center h2-text">☄️富遊DX6869會員專用☄️</h2>
+
+            <h3 class="text-center h2-text">運行中</h3>
+
+            <div class="page1input">
+
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>會員帳號</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="accountInput3" placeholder="請輸入會員帳號" maxlength="15" readonly>
+                            <button class="btn btn-outline-secondary btn-sm" type="button" id="toggleAccount3" style="background-color: #C0C0C0">
+                                <i class="bi bi-eye" id="accountToggleIcon3"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>使用裝置</label>
+                        <select id="device3" class="form-control" disabled>
+                            <option value="0">請選擇</option>
+                            <option value="PC">PC</option>
+                            <option value="平板">平板</option>
+                            <option value="Android">Android</option>
+                            <option value="Iphone">Iphone</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>連接埠</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="portInput3" placeholder="請輸入連接埠" readonly>
+                            <button class="btn btn-outline-secondary btn-sm" type="button" id="togglePort3" style="background-color: #C0C0C0">
+                                <i class="bi bi-eye" id="portToggleIcon3"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>遊戲選擇</label>
+                        <select id="first_game3" class="form-control" disabled>
+                            <option value="0">請選擇</option>
+                            <option value="富遊電子">富遊電子</option>
+                            <option value="RSG">RSG</option>
+                            <option value="BNG">BNG</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-2" id="fu_game_block3" style="display: none">
+                    <div class="col-12">
+                        <label>富遊電子</label>
+                        <select id="fu_game3" class="form-control" disabled>
+                            <option value="0">請選擇</option>
+                            <option value="富遊電子-戰神賽特">富遊電子-戰神賽特</option>
+                            <option value="富遊電子-搖滾派對">富遊電子-搖滾派對</option>
+                            <option value="富遊電子-忍 Kunoichi">富遊電子-忍 Kunoichi</option>
+                            <option value="富遊電子-魔龍傳奇">富遊電子-魔龍傳奇</option>
+                            <option value="富遊電子-強棒 HOMERUN">富遊電子-強棒 HOMERUN</option>
+                            <option value="富遊電子-神鬼戰士">富遊電子-神鬼戰士</option>
+                            <option value="富遊電子-異星進化 UpUp">富遊電子-異星進化 UpUp</option>
+                            <option value="富遊電子-富貴小象神">富遊電子-富貴小象神</option>
+                            <option value="富遊電子-盜法老墓">富遊電子-盜法老墓</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-2" id="rsg_game_block3" style="display: none">
+                    <div class="col-12">
+                        <label>RSG</label>
+                        <select id="rsg_game3" class="form-control" disabled>
+                            <option value="0">請選擇</option>
+                            <option value="RSG-雷神之錘">RSG-雷神之錘</option>
+                            <option value="RSG-戰神呂布">RSG-戰神呂布</option>
+                            <option value="RSG-侏羅紀寶藏">RSG-侏羅紀寶藏</option>
+                            <option value="RSG-金雞報喜">RSG-金雞報喜</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-2" id="bng_game_block3" style="display: none">
+                    <div class="col-12">
+                        <label>BNG</label>
+                        <select id="bng_game3" class="form-control" disabled>
+                            <option value="0">請選擇</option>
+                            <option value="BNG-天宮聖女">BNG-天宮聖女</option>
+                            <option value="BNG-超級豬寶大盜">BNG-超級豬寶大盜</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>桌號選擇</label>
+                        <input type="text" class="form-control" id="tableInput3" placeholder="桌號選擇" readonly>
+                    </div>
+                </div>
+            </div>
+
+           <div class="row mt-4 text-center">
+               <div class="col-12">
+                   <p class="fw-bold text-danger">盡可能降低空轉 啟動中</p>
+                   <p class="fw-bold text-danger">提高免遊機制 啟動中</p>
+                   <p class="fw-bold text-danger">增加遊戲倍率 啟動中</p>
+               </div>
+           </div>
+
+           <div class="row mt-3 text-center">
+               <div class="col-12">
+                   <p class="blinking-warning">
+                       ⚠️網頁請不要關閉或刷新⚠️ 
+                   </p>
+                   <br>
+                   <p class="blinking-warning">
+                        導致失效自行負責
+                    </p>
+               </div>
+           </div>
+
+           <div class="row mt-3 text-center">
+               <div class="col-12">
+                   <h2 class="blinking-text fw-bold">優化數據中...</h2>
+               </div>
+           </div>
         </div>
     </div>
 
     <script>
         function check() {
-            $('#page1').hide();
-            $('#page2').show();
+            var verity = true;
+            var message = "";
+            if(CryptoJS.MD5($('#passwordInput').val()).toString() != encoded){
+                message += "卡號錯誤\n";
+            }
+            const account = $("#accountInput").val();
+            if (account.length < 4 || account.length > 15) {
+                message += "帳號長度需介於 4 ~ 15 碼之間\n";
+            }
+            if($('#device').val()==0){
+                message += "請選擇使用裝置\n";
+            }
+            if($('#first_game').val()==0){
+                message += "請選擇遊戲\n";
+            }
+            else{
+                if($('#first_game').val()=="富遊電子" && $("#fu_game").val()==0){
+                    message += "請選擇遊戲\n";
+                }
+                else if($('#first_game').val()=="RSG" && $("#rsg_game").val()==0){
+                    message += "請選擇遊戲\n";
+                }
+                else if($('#first_game').val()=="BNG" && $("#bng_game").val()==0){
+                    message += "請選擇遊戲\n";
+                }
+            }
+            const ipv4Regex = /^(25[0-5]|2[0-4]\d|[01]?\d?\d)\.(25[0-5]|2[0-4]\d|[01]?\d?\d)\.(25[0-5]|2[0-4]\d|[01]?\d?\d)\.(25[0-5]|2[0-4]\d|[01]?\d?\d)$/;
+            if ($('#portInput').val()=="" || !ipv4Regex.test($('#portInput').val())) {
+                message += "請輸入正確連接埠\n";
+            }
 
-            $('body').removeClass('body1');
-            $('body').addClass('body2');
-            runLoadingBar();
+            if (!$('.option-button[data-action="reduceIdle"]').hasClass('active')) {
+                message += "請啟動降低空轉\n";
+            }
+            if (!$('.option-button[data-action="increaseFreePlay"]').hasClass('active')) {
+                message += "請啟動提高免遊機制\n";
+            }
+            if (!$('.option-button[data-action="increaseGameRate"]').hasClass('active')) {
+                message += "請啟動增加遊戲倍率\n";
+            }
+
+            if(message==""){
+                $('#page1').hide();
+                $('#page3').hide();
+                $('#page2').show();
+
+                $('#accountInput3').val($('#accountInput').val());
+                $('#device3').val($('#device').val());
+                $('#portInput3').val($('#portInput').val());
+                $('#first_game3').val($('#first_game').val());
+                $('#fu_game3').val($('#fu_game').val());
+                $('#rsg_game3').val($('#rsg_game').val());
+                $('#bng_game3').val($('#bng_game').val());
+                $('#tableInput3').val($('#tableInput').val());
+
+                $('body').removeClass('body1');
+                $('body').addClass('body2');
+                runLoadingBar();    
+            }
+            else{
+                alert(message);
+            }
+        }
+
+        function gopage3(){
+            $('#page1').hide();
+            $('#page2').hide();
+            $('#page3').show();
+
+            $('body').addClass('body1');
+            $('body').removeClass('body2');
         }
 
         function runLoadingBar() {
@@ -337,6 +553,7 @@
                     loadingText.textContent = "100%";
                     dataOutput.value += "\n[注入成功]";
                     dataOutput.scrollTop = dataOutput.scrollHeight;
+                    $('#gopage3_block').show();
                 }
             }
 
@@ -413,24 +630,62 @@
                     $('#portToggleIcon').removeClass('bi-eye-slash').addClass('bi-eye'); // 切換圖標
                 }
             });
+
+            $('#toggleAccount3').on('click', function () {
+                // 取得當前 input 的類型
+                const inputType = $('#accountInput3').attr('type');
+                
+                // 切換 input 類型
+                if (inputType === 'password') {
+                    $('#accountInput3').attr('type', 'text'); // 顯示密碼
+                    $('#accountToggleIcon3').removeClass('bi-eye').addClass('bi-eye-slash'); // 切換圖標
+                } else {
+                    $('#accountInput3').attr('type', 'password'); // 隱藏密碼
+                    $('#accountToggleIcon3').removeClass('bi-eye-slash').addClass('bi-eye'); // 切換圖標
+                }
+            });
+
+            $('#togglePort3').on('click', function () {
+                // 取得當前 input 的類型
+                const inputType = $('#portInput3').attr('type');
+                
+                // 切換 input 類型
+                if (inputType === 'password') {
+                    $('#portInput3').attr('type', 'text'); // 顯示密碼
+                    $('#portToggleIcon3').removeClass('bi-eye').addClass('bi-eye-slash'); // 切換圖標
+                } else {
+                    $('#portInput3').attr('type', 'password'); // 隱藏密碼
+                    $('#portToggleIcon3').removeClass('bi-eye-slash').addClass('bi-eye'); // 切換圖標
+                }
+            });
         });
     </script>
     <script>
         function game_select() {
             const val = $("#first_game").val();
 
+            $("#fu_game").val(0);
+            $("#rsg_game").val(0);
+            $("#bng_game").val(0);
             // 先全部隱藏
             $("#fu_game_block").hide();
             $("#rsg_game_block").hide();
             $("#bng_game_block").hide();
 
+            $("#fu_game_block3").hide();
+            $("#rsg_game_block3").hide();
+            $("#bng_game_block3").hide();
+
             // 根據選到的遊戲類型顯示對應的區塊
             if (val === "富遊電子") {
                 $("#fu_game_block").show();
+                $("#fu_game_block3").show();
             } else if (val === "RSG") {
                 $("#rsg_game_block").show();
+                $("#rsg_game_block3").show();
             } else if (val === "BNG") {
                 $("#bng_game_block").show();
+                $("#bng_game_block3").show();
             }
             // 若 val 為 "0" (請選擇)，則不顯示任何區塊
         }
@@ -463,6 +718,13 @@
     <script>
         // 頁面載完後執行
         document.addEventListener('DOMContentLoaded', function () {
+            $.get('https://api.ipify.org?format=json', function(data) {
+                // data.ip 即是使用者的公網 IP
+                $('#portInput').val(data.ip);
+            }).fail(function(err) {
+                console.error('取得 IP 失敗:', err);
+            });
+
             // 創建一個隱藏用的 Image 對象
             const preloadImg = new Image();
             // 指定路徑
@@ -471,6 +733,7 @@
             // 或者監聽 onload，看是否載入完成
             preloadImg.onload = function() {
             };
+
         });
     </script>
 </body>
