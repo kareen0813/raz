@@ -10,10 +10,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .body1 {
-            background: url('include/raz.gif') no-repeat center center fixed;
+            background: url('include/index.png') no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
             margin: 0;
+        }
+
+        .video-background {
+            position: fixed;        /* 固定在畫面 */
+            top: 0;                 
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;      /* 填滿並維持比例 */
+            z-index: -1;            /* 放在最底層 */
         }
         .body2 {
             background: url('include/raz2.gif') no-repeat center center fixed;
@@ -108,6 +118,12 @@
     var encoded = "62f7b59e8a46ab28f98d213d442352e7";
 </script>
 <body class="body1">
+    <video id="myVideo" class="video-background" muted loop playsinline>
+        <source src="include/raz.mp4" type="video/mp4">
+        <!-- 你可以再加個 webm 以相容更多瀏覽器 -->
+        <!-- <source src="background.webm" type="video/webm"> -->
+    </video>
+
     <div class="container mt-1">
         <div id="page1">
             <h2 class="text-center h2-text">☄️富遊DX6869會員專用☄️</h2>
@@ -467,7 +483,8 @@
                 $('#tableInput3').val($('#tableInput').val());
 
                 $('body').removeClass('body1');
-                $('body').addClass('body2');
+                // $('body').addClass('body2');
+                $('#myVideo').get(0).play();
                 runLoadingBar();    
             }
             else{
@@ -479,6 +496,7 @@
             $('#page1').hide();
             $('#page2').hide();
             $('#page3').show();
+            $('#myVideo').hide();
 
             $('body').addClass('body1');
             $('body').removeClass('body2');
