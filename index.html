@@ -34,7 +34,6 @@
 
         .option-button:focus {
             outline: none !important;
-            box-shadow: none !important;
         }
 
         .option-button {
@@ -47,6 +46,10 @@
         }
 
         .blinking-text {
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+        .h2-text {
             font-weight: bold;
             animation: blink 1s infinite;
         }
@@ -63,7 +66,7 @@
 
         #dataOutput {
             width: 100%;
-            height: 400px;
+            height: 450px;
             font-family: monospace;
             background-color: #00000040;
             color: #0f0;
@@ -233,7 +236,7 @@
         <div id="page2" style="display: none;">
             <div class="text-center mt-5">
                 <h2 class="h2-text">系統注入中....</h2>
-                <div class="output-container" style="width: 80%; margin: 0 auto; border: 1px solid #ccc; border-radius: 5px; overflow: hidden; background-color: #00000060;">
+                <div class="output-container" style="width: 95%; margin: 0 auto; border: 1px solid #ccc; border-radius: 5px; overflow: hidden; background-color: #00000060;">
                     <div id="loadingBarContainer" class="mt-3" style="width: 80%; margin: 0 auto; height: 30px; background-color: #f0f0f0; border-radius: 5px; overflow: hidden;">
                         <div id="loadingBar" style="height: 100%; width: 0; background-color: #0d6efd; transition: width 0.1s linear;"></div>
                     </div>
@@ -258,17 +261,22 @@
             var precent = Math.floor(Math.random() * (97 - 80 + 1)) + 80;
             const dataSamples = [
                 "整理資料庫統整數據中..",
+                "",
                 "請稍後..",
+                "",
                 "設置..",
+                "",
                 "目標中獎率：" + precent + "%",
                 "開啟：咬分屏蔽/優化數據",
-                "高頻率免遊機率開啟",
+                "     高頻率免遊機率開啟",
                 "備註：千元本金設置",
-                "爆分超過本金" + precent + "%將停止作業",
+                "     爆分超過本金" + precent + "%將停止作業",
+                "",
                 "使用人員請詳閱注意事項",
                 "機台有保護機制",
                 "切勿強制關閉導致系統受損",
                 "後果恕不負責⛔",
+                "",
                 "任何問題私訊版主"
             ];
 
@@ -294,26 +302,24 @@
                     loadingText.textContent = Math.floor(progress) + '%';
 
                     if (phase === 1) {
-                        // 第一段輸出
                         dataOutput.value += `${dataSamples[index]}\n`;
                         index++;
                         progress += progressIncrement;
 
                         if (index === dataSamples.length) {
-                            phase = 2; // 切換到第二段
-                            setTimeout(step, 2000); // 停留 2 秒後繼續
+                            phase = 2;
+                            setTimeout(step, 2000);
                             return;
                         }
 
-                        setTimeout(step, 100); // 第一段每行延遲 100 毫秒
+                        setTimeout(step, 100);
                     } else {
-                        // 第二段輸出
-                        dataOutput.value += `${dataSamples2[index - dataSamples.length]}\n`;
+                        dataOutput.value += `${dataSamples2[index - dataSamples.length]}`;
                         dataOutput.scrollTop = dataOutput.scrollHeight;
                         index++;
                         progress += progressIncrement;
 
-                        setTimeout(step, 30); // 第二段每行延遲 30 毫秒
+                        setTimeout(step, 30);
                     }
                 } else {
                     loadingBar.style.width = '100%';
@@ -337,8 +343,8 @@
             const randomData = [];
             for (let i = 0; i < numLines; i++) {
                 const randomAction = actions[Math.floor(Math.random() * actions.length)];
-                const randomId = `${randomHex(8)}-${randomHex(4)}-${randomHex(4)}-${randomHex(4)}-${randomHex(12)}`;
-                randomData.push(`${randomAction} ${randomId}...`);
+                const randomId = `${randomHex(4)}-${randomHex(4)}-${randomHex(4)}-${randomHex(4)}${randomHex(8)}`;
+                randomData.push(`${randomAction} ${randomId}`);
             }
             return randomData;
         }
@@ -351,6 +357,33 @@
             }
             return result;
         }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.option-button').on('click', function () {
+                $(this).toggleClass('active');
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('btn-outline-secondary').addClass('btn-primary');
+                } else {
+                    $(this).removeClass('btn-primary').addClass('btn-outline-secondary');
+                }
+            });
+        });
+
+        $(document).on('contextmenu', function (e) {
+            e.preventDefault();
+        });
+        $(document).on('keydown', function (e) {
+            // if (
+            //     e.key === 'F12' ||
+            //     (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+            //     (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+            //     (e.ctrlKey && e.key === 'U')
+            // ) {
+            //     e.preventDefault();
+            // }
+        });
     </script>
 </body>
 </html>
