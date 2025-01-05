@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Menu with Links</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Select a Game</h2>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Choose a Game
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="https://www.google.com" target="_blank">Google</a></li>
+                <li><a class="dropdown-item" href="https://www.facebook.com" target="_blank">Facebook</a></li>
+                <li><a class="dropdown-item" href="https://www.twitter.com" target="_blank">Twitter</a></li>
+                <li><a class="dropdown-item" href="https://www.linkedin.com" target="_blank">LinkedIn</a></li>
+                <li><a class="dropdown-item" href="https://www.github.com" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <label>啟動卡號</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter your password">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i class="bi bi-eye" id="toggleIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label>啟動卡號</label>
+                <select class="form-control">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        togglePassword.addEventListener('click', function () {
+            // 切換 input 的類型
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // 切換圖標
+            toggleIcon.classList.toggle('bi-eye');
+            toggleIcon.classList.toggle('bi-eye-slash');
+        });
+    </script>
+    <script>
+        // 禁止右鍵選單
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        // 禁止 F12 和開發者工具快捷鍵
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
