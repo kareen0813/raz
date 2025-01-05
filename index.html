@@ -6,45 +6,215 @@
     <title>Dropdown Menu with Links</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        label{
+            font-weight: bold;
+        }
+        .active-button {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .blinking-text {
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                color: red;
+            }
+            50% {
+                color: blue;
+                opacity: 0.5;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Select a Game</h2>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Choose a Game
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="https://www.google.com" target="_blank">Google</a></li>
-                <li><a class="dropdown-item" href="https://www.facebook.com" target="_blank">Facebook</a></li>
-                <li><a class="dropdown-item" href="https://www.twitter.com" target="_blank">Twitter</a></li>
-                <li><a class="dropdown-item" href="https://www.linkedin.com" target="_blank">LinkedIn</a></li>
-                <li><a class="dropdown-item" href="https://www.github.com" target="_blank">GitHub</a></li>
-            </ul>
+    <div class="container mt-2">
+        <h2 class="text-center" style="font-weight: bold">☄️富遊DX6869會員專用☄️</h2>
+        <hr>
+        <div class="row mt-2 text-center">
+            <div class="col-12 text-center">
+                <a href="https://rggo5269.com/#/ag/DX6869" class="btn btn-primary" target="_blank">註冊帳號</a>
+                <label style="color: red">☛註冊好私訊我☚</label>
+            </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-2 text-center">
             <div class="col-12">
                 <label>啟動卡號</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter your password">
+                    <input type="password" class="form-control" id="passwordInput" placeholder="請輸入啟動卡號">
                     <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                         <i class="bi bi-eye" id="toggleIcon"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <div class="row">
+
+        <div class="row mt-2 text-center">
             <div class="col-12">
-                <label>啟動卡號</label>
+                <label>會員帳號</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="accountInput" placeholder="請輸入會員帳號" maxlength="15">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i class="bi bi-eye" id="toggleIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-center">
+            <div class="col-12">
+                <label>使用裝置</label>
                 <select class="form-control">
-                    <option></option>
+                    <option>PC</option>
+                    <option>平板</option>
+                    <option>Android</option>
+                    <option>Iphone</option>
                 </select>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-center">
+            <div class="col-12">
+                <label>連接埠</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="portInput" placeholder="請輸入連接埠">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i class="bi bi-eye" id="toggleIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-center">
+            <div class="col-12">
+                <label>遊戲選擇</label>
+                <select id="first_game" class="form-control" onchange="game_select()">
+                    <option value="0">請選擇</option>
+                    <option value="富遊電子">富遊電子</option>
+                    <option value="RSG">RSG</option>
+                    <option value="BNG">BNG</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-2" id="fu_game_block" style="display: none">
+            <div class="col-12">
+                <label>富遊電子</label>
+                <select id="fu_game" class="form-control">
+                    <option value="富遊電子-戰神賽特">富遊電子-戰神賽特</option>
+                    <option value="富遊電子-搖滾派對">富遊電子-搖滾派對</option>
+                    <option value="富遊電子-忍 Kunoichi">富遊電子-忍 Kunoichi</option>
+                    <option value="富遊電子-魔龍傳奇">富遊電子-魔龍傳奇</option>
+                    <option value="富遊電子-強棒 HOMERUN">富遊電子-強棒 HOMERUN</option>
+                    <option value="富遊電子-神鬼戰士">富遊電子-神鬼戰士</option>
+                    <option value="富遊電子-異星進化 UpUp">富遊電子-異星進化 UpUp</option>
+                    <option value="富遊電子-富貴小象神">富遊電子-富貴小象神</option>
+                    <option value="富遊電子-盜法老墓">富遊電子-盜法老墓</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-2" id="rsg_game_block" style="display: none">
+            <div class="col-12">
+                <label>RSG</label>
+                <select id="rsg_game" class="form-control">
+                    <option value="RSG-雷神之錘">RSG-雷神之錘</option>
+                    <option value="RSG-戰神呂布">RSG-戰神呂布</option>
+                    <option value="RSG-侏羅紀寶藏">RSG-侏羅紀寶藏</option>
+                    <option value="RSG-金雞報喜">RSG-金雞報喜</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-2" id="bng_game_block" style="display: none">
+            <div class="col-12">
+                <label>BNG</label>
+                <select id="bng_game" class="form-control">
+                    <option>BNG-天宮聖女</option>
+                    <option>BNG-超級豬寶大盜</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-2 text-center">
+            <div class="col-12">
+                <label>桌號選擇</label>
+                <input type="text" class="form-control" id="tableInput" placeholder="桌號選擇">
+            </div>
+        </div>
+
+        <div class="row mt-2 text-center">
+            <div class="col-12 mt-2">
+                <label>降低空轉</label>
+                <button class="btn btn-outline-secondary btn-sm option-button" data-action="reduceIdle">啟動</button>
+            </div>
+            <div class="col-12 mt-2">
+                <label>提高免遊機制</label>
+                <button class="btn btn-outline-secondary btn-sm option-button" data-action="increaseFreePlay">啟動</button>
+            </div>
+            <div class="col-12 mt-2">
+                <label>增加遊戲倍率</label>
+                <button class="btn btn-outline-secondary btn-sm option-button" data-action="increaseGameRate">啟動</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-2 text-center">
+            <div class="col-12">
+                <div class="text-center">
+                    <label class="blinking-text">※優化數據 從資料確定後開始讀取※</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="text-center">
+
+                    <button class="btn btn-primary w-50" type="button">確定</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function game_select(){
+
+            console.log($('#first_game').val());
+            $('#fu_game_block').hide();
+            $('#rsg_game_block').hide();
+            $('#bng_game_block').hide();
+            if($('#first_game').val()=='富遊電子'){
+                $('#fu_game_block').show();
+            }
+            else if($('#first_game').val()=='RSG'){
+                $('#rsg_game_block').show();
+            }
+            else if($('#first_game').val()=='BNG'){
+                $('#bng_game_block').show();
+            }
+        }
+    </script>
+
+    <script>
+        const optionButtons = document.querySelectorAll('.option-button');
+
+        // 點擊選項按鈕觸發啟動或取消效果
+        optionButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                if (button.classList.contains('active-button')) {
+                    // 如果已啟動，則取消啟動
+                    button.classList.remove('active-button');
+                } else {
+                    // 如果未啟動，則啟動
+                    button.classList.add('active-button');
+                }
+            });
+        });
+    </script>
 
     <script>
         const passwordInput = document.getElementById('passwordInput');
@@ -60,22 +230,56 @@
             toggleIcon.classList.toggle('bi-eye');
             toggleIcon.classList.toggle('bi-eye-slash');
         });
-    </script>
-    <script>
-        // 禁止右鍵選單
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
+
+        const accountInput = document.getElementById('accountInput');
+
+        accountInput.addEventListener('input', function () {
+            const originalValue = accountInput.value; // 獲取輸入框的原始值
+            let maskedValue = ''; // 用來存放遮罩後的值
+
+            // 遍歷每個字元並進行遮罩處理
+            for (let i = 0; i < originalValue.length; i++) {
+                if (i%2==0) {
+                    maskedValue += '*';
+                } else {
+                    maskedValue += originalValue[i];
+                }
+            }
+
+            accountInput.value = maskedValue; // 更新輸入框的值
         });
 
-        // 禁止 F12 和開發者工具快捷鍵
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
-                (e.ctrlKey && e.shiftKey && e.key === 'J') || 
-                (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
+        const portInput = document.getElementById('portInput');
+
+        portInput.addEventListener('input', function () {
+            const originalValue = portInput.value; // 獲取輸入框的原始值
+            let maskedValue = ''; // 用來存放遮罩後的值
+
+            // 遍歷每個字元並進行遮罩處理
+            for (let i = 0; i < originalValue.length; i++) {
+                if (i%2==0) {
+                    maskedValue += '*';
+                } else {
+                    maskedValue += originalValue[i];
+                }
             }
+
+            portInput.value = maskedValue; // 更新輸入框的值
         });
+    </script>
+    <script>
+        // document.addEventListener('contextmenu', function (e) {
+        //     e.preventDefault();
+        // });
+
+        // document.addEventListener('keydown', function (e) {
+        //     if (e.key === 'F12' || 
+        //         (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+        //         (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+        //         (e.ctrlKey && e.key === 'U')) {
+        //         e.preventDefault();
+        //     }
+        // });
     </script>
 </body>
 </html>
