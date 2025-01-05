@@ -13,7 +13,6 @@
             background-size: cover;
             height: 100vh;
             margin: 0;
-            overflow: hidden;
         }
         .body2 {
             background: url('include/raz.gif') no-repeat center center fixed;
@@ -24,6 +23,7 @@
         }
 
         label {
+            font-size: 14pt;
             color: white;
             font-weight: bold;
         }
@@ -75,6 +75,10 @@
             overflow: hidden;
         }
 
+        .page1input{
+            padding-left: 10%;
+            padding-right: 10%;
+        }
 
         .container {
             padding: 8%;
@@ -85,6 +89,11 @@
             .container {
                 padding-top: 4%;
             }
+        }
+
+        .form-control {
+            padding-top: 0.1rem;
+            padding-bottom: 0.1rem;
         }
     </style>
 </head>
@@ -100,108 +109,111 @@
                 </div>
             </div>
 
-            <div class="row mt-1 text-center">
-                <div class="col-12">
-                    <label>啟動卡號</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" id="passwordInput" placeholder="請輸入啟動卡號">
-                        <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="background-color: #C0C0C0">
-                            <i class="bi bi-eye" id="toggleIcon"></i>
-                        </button>
+            <div class="page1input">
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>啟動卡號</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="passwordInput" placeholder="請輸入啟動卡號">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" id="togglePassword" style="background-color: #C0C0C0">
+                                <i class="bi bi-eye" id="passwordToggleIcon"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row mt-1 text-center">
-                <div class="col-12">
-                    <label>會員帳號</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="accountInput" placeholder="請輸入會員帳號" maxlength="15">
-                        <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="background-color: #C0C0C0">
-                            <i class="bi bi-eye" id="toggleIcon"></i>
-                        </button>
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>會員帳號</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="accountInput" placeholder="請輸入會員帳號" maxlength="15">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" id="toggleAccount" style="background-color: #C0C0C0">
+                                <i class="bi bi-eye" id="accountToggleIcon"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row mt-1 text-center">
-                <div class="col-12">
-                    <label>使用裝置</label>
-                    <select class="form-control">
-                        <option>PC</option>
-                        <option>平板</option>
-                        <option>Android</option>
-                        <option>Iphone</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row mt-1 text-center">
-                <div class="col-12">
-                    <label>連接埠</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="portInput" placeholder="請輸入連接埠">
-                        <button class="btn btn-outline-secondary" type="button" id="togglePassword" style="background-color: #C0C0C0">
-                            <i class="bi bi-eye" id="toggleIcon"></i>
-                        </button>
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>使用裝置</label>
+                        <select class="form-control">
+                            <option value="0">請選擇</option>
+                            <option value="PC">PC</option>
+                            <option value="平板">平板</option>
+                            <option value="Android">Android</option>
+                            <option value="Iphone">Iphone</option>
+                        </select>
                     </div>
                 </div>
-            </div>
 
-            <div class="row mt-1 text-center">
-                <div class="col-12">
-                    <label>遊戲選擇</label>
-                    <select id="first_game" class="form-control" onchange="game_select()">
-                        <option value="0">請選擇</option>
-                        <option value="富遊電子">富遊電子</option>
-                        <option value="RSG">RSG</option>
-                        <option value="BNG">BNG</option>
-                    </select>
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>連接埠</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="portInput" placeholder="請輸入連接埠">
+                            <button class="btn btn-outline-secondary btn-sm" type="button" id="togglePort" style="background-color: #C0C0C0">
+                                <i class="bi bi-eye" id="portToggleIcon"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row mt-2" id="fu_game_block" style="display: none">
-                <div class="col-12">
-                    <label>富遊電子</label>
-                    <select id="fu_game" class="form-control">
-                        <option value="富遊電子-戰神賽特">富遊電子-戰神賽特</option>
-                        <option value="富遊電子-搖滾派對">富遊電子-搖滾派對</option>
-                        <option value="富遊電子-忍 Kunoichi">富遊電子-忍 Kunoichi</option>
-                        <option value="富遊電子-魔龍傳奇">富遊電子-魔龍傳奇</option>
-                        <option value="富遊電子-強棒 HOMERUN">富遊電子-強棒 HOMERUN</option>
-                        <option value="富遊電子-神鬼戰士">富遊電子-神鬼戰士</option>
-                        <option value="富遊電子-異星進化 UpUp">富遊電子-異星進化 UpUp</option>
-                        <option value="富遊電子-富貴小象神">富遊電子-富貴小象神</option>
-                        <option value="富遊電子-盜法老墓">富遊電子-盜法老墓</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="row mt-2" id="rsg_game_block" style="display: none">
-                <div class="col-12">
-                    <label>RSG</label>
-                    <select id="rsg_game" class="form-control">
-                        <option value="RSG-雷神之錘">RSG-雷神之錘</option>
-                        <option value="RSG-戰神呂布">RSG-戰神呂布</option>
-                        <option value="RSG-侏羅紀寶藏">RSG-侏羅紀寶藏</option>
-                        <option value="RSG-金雞報喜">RSG-金雞報喜</option>
-                    </select>
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>遊戲選擇</label>
+                        <select id="first_game" class="form-control" onchange="game_select()">
+                            <option value="0">請選擇</option>
+                            <option value="富遊電子">富遊電子</option>
+                            <option value="RSG">RSG</option>
+                            <option value="BNG">BNG</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row mt-2" id="bng_game_block" style="display: none">
-                <div class="col-12">
-                    <label>BNG</label>
-                    <select id="bng_game" class="form-control">
-                        <option>BNG-天宮聖女</option>
-                        <option>BNG-超級豬寶大盜</option>
-                    </select>
+                <div class="row mt-2" id="fu_game_block" style="display: none">
+                    <div class="col-12">
+                        <label>富遊電子</label>
+                        <select id="fu_game" class="form-control">
+                            <option value="富遊電子-戰神賽特">富遊電子-戰神賽特</option>
+                            <option value="富遊電子-搖滾派對">富遊電子-搖滾派對</option>
+                            <option value="富遊電子-忍 Kunoichi">富遊電子-忍 Kunoichi</option>
+                            <option value="富遊電子-魔龍傳奇">富遊電子-魔龍傳奇</option>
+                            <option value="富遊電子-強棒 HOMERUN">富遊電子-強棒 HOMERUN</option>
+                            <option value="富遊電子-神鬼戰士">富遊電子-神鬼戰士</option>
+                            <option value="富遊電子-異星進化 UpUp">富遊電子-異星進化 UpUp</option>
+                            <option value="富遊電子-富貴小象神">富遊電子-富貴小象神</option>
+                            <option value="富遊電子-盜法老墓">富遊電子-盜法老墓</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row mt-1 text-center">
-                <div class="col-12">
-                    <label>桌號選擇</label>
-                    <input type="text" class="form-control" id="tableInput" placeholder="桌號選擇">
+                <div class="row mt-2" id="rsg_game_block" style="display: none">
+                    <div class="col-12">
+                        <label>RSG</label>
+                        <select id="rsg_game" class="form-control">
+                            <option value="RSG-雷神之錘">RSG-雷神之錘</option>
+                            <option value="RSG-戰神呂布">RSG-戰神呂布</option>
+                            <option value="RSG-侏羅紀寶藏">RSG-侏羅紀寶藏</option>
+                            <option value="RSG-金雞報喜">RSG-金雞報喜</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-2" id="bng_game_block" style="display: none">
+                    <div class="col-12">
+                        <label>BNG</label>
+                        <select id="bng_game" class="form-control">
+                            <option>BNG-天宮聖女</option>
+                            <option>BNG-超級豬寶大盜</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-1 text-center">
+                    <div class="col-12">
+                        <label>桌號選擇</label>
+                        <input type="text" class="form-control" id="tableInput" placeholder="桌號選擇">
+                    </div>
                 </div>
             </div>
 
@@ -219,7 +231,6 @@
                     <button class="btn btn-outline-secondary btn-sm option-button" data-action="increaseGameRate">啟動</button>
                 </div>
             </div>
-            <hr>
             <div class="row mt-1 text-center">
                 <div class="col-12">
                     <div class="text-center">
@@ -360,6 +371,70 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            $('#togglePassword').on('click', function () {
+                // 取得當前 input 的類型
+                const inputType = $('#passwordInput').attr('type');
+                
+                // 切換 input 類型
+                if (inputType === 'password') {
+                    $('#passwordInput').attr('type', 'text'); // 顯示密碼
+                    $('#passwordToggleIcon').removeClass('bi-eye').addClass('bi-eye-slash'); // 切換圖標
+                } else {
+                    $('#passwordInput').attr('type', 'password'); // 隱藏密碼
+                    $('#passwordToggleIcon').removeClass('bi-eye-slash').addClass('bi-eye'); // 切換圖標
+                }
+            });
+
+            $('#toggleAccount').on('click', function () {
+                // 取得當前 input 的類型
+                const inputType = $('#accountInput').attr('type');
+                
+                // 切換 input 類型
+                if (inputType === 'password') {
+                    $('#accountInput').attr('type', 'text'); // 顯示密碼
+                    $('#accountToggleIcon').removeClass('bi-eye').addClass('bi-eye-slash'); // 切換圖標
+                } else {
+                    $('#accountInput').attr('type', 'password'); // 隱藏密碼
+                    $('#accountToggleIcon').removeClass('bi-eye-slash').addClass('bi-eye'); // 切換圖標
+                }
+            });
+
+            $('#togglePort').on('click', function () {
+                // 取得當前 input 的類型
+                const inputType = $('#portInput').attr('type');
+                
+                // 切換 input 類型
+                if (inputType === 'password') {
+                    $('#portInput').attr('type', 'text'); // 顯示密碼
+                    $('#portToggleIcon').removeClass('bi-eye').addClass('bi-eye-slash'); // 切換圖標
+                } else {
+                    $('#portInput').attr('type', 'password'); // 隱藏密碼
+                    $('#portToggleIcon').removeClass('bi-eye-slash').addClass('bi-eye'); // 切換圖標
+                }
+            });
+        });
+    </script>
+    <script>
+        function game_select() {
+            const val = $("#first_game").val();
+
+            // 先全部隱藏
+            $("#fu_game_block").hide();
+            $("#rsg_game_block").hide();
+            $("#bng_game_block").hide();
+
+            // 根據選到的遊戲類型顯示對應的區塊
+            if (val === "富遊電子") {
+                $("#fu_game_block").show();
+            } else if (val === "RSG") {
+                $("#rsg_game_block").show();
+            } else if (val === "BNG") {
+                $("#bng_game_block").show();
+            }
+            // 若 val 為 "0" (請選擇)，則不顯示任何區塊
+        }
+
         $(document).ready(function () {
             $('.option-button').on('click', function () {
                 $(this).toggleClass('active');
