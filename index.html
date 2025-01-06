@@ -26,7 +26,7 @@
             z-index: -1;            /* 放在最底層 */
         }
         .body2 {
-            background: url('include/raz2.gif') no-repeat center center fixed;
+            background: url('include/S2.gif') no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
             margin: 0;
@@ -118,11 +118,9 @@
     var encoded = "62f7b59e8a46ab28f98d213d442352e7";
 </script>
 <body class="body1">
-    <video id="myVideo" class="video-background" muted loop playsinline>
+    <!-- <video id="myVideo" class="video-background" muted loop playsinline>
         <source src="include/raz2.mp4" type="video/mp4">
-        <!-- 你可以再加個 webm 以相容更多瀏覽器 -->
-        <!-- <source src="background.webm" type="video/webm"> -->
-    </video>
+    </video> -->
 
     <div class="container mt-1">
         <div id="page1">
@@ -482,9 +480,9 @@
                 $('#bng_game3').val($('#bng_game').val());
                 $('#tableInput3').val($('#tableInput').val());
 
-                // $('body').removeClass('body1');
-                // $('body').addClass('body2');
-                $('#myVideo').get(0).play();
+                $('body').removeClass('body1');
+                $('body').addClass('body2');
+                // $('#myVideo').get(0).play();
                 runLoadingBar();    
             }
             else{
@@ -496,10 +494,10 @@
             $('#page1').hide();
             $('#page2').hide();
             $('#page3').show();
-            $('#myVideo').hide();
+            // $('#myVideo').hide();
 
-            // $('body').addClass('body1');
-            // $('body').removeClass('body2');
+            $('body').addClass('body1');
+            $('body').removeClass('body2');
         }
 
         function runLoadingBar() {
@@ -746,8 +744,7 @@
             // 創建一個隱藏用的 Image 對象
             const preloadImg = new Image();
             // 指定路徑
-            preloadImg.src = 'include/raz2.gif';
-            
+            preloadImg.src = 'include/S2.gif';
             // 或者監聽 onload，看是否載入完成
             preloadImg.onload = function() {
             };
